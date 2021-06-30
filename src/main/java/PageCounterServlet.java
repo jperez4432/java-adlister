@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @WebServlet (name = "PageCounter", urlPatterns = "/count")
-public class PageCounter extends HttpServlet {
+public class PageCounterServlet extends HttpServlet {
     int countViews = 0;
 
     @Override
@@ -16,7 +16,7 @@ public class PageCounter extends HttpServlet {
         PrintWriter out = resp.getWriter();
 
         if(req.getParameter("reset") != null)
-            countViews = 0;
+            countViews = 1;
         else
             countViews += 1;
         out.println("<h1>The count is currently at " + countViews + "</h1>");

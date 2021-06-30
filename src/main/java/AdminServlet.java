@@ -12,6 +12,7 @@ public class AdminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         PrintWriter out = resp.getWriter();
+        //purpose of the try catch? it works regardless and am curious to why it is necessary
         try {
 //        check for param of isAdmin, if set to yes, then runs if statement. Otherwise, redirects to hello-world
             boolean isAdmin = req.getParameter("isAdmin").equalsIgnoreCase("yes");
