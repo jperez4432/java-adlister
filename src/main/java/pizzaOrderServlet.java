@@ -45,7 +45,5 @@ public class pizzaOrderServlet extends HttpServlet {
         for (String topping : toppings){
             out.printf("<h1>%s</h1>", topping);
         }
-
-
     }
 }

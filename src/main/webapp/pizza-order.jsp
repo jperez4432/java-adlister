@@ -14,7 +14,7 @@
 <h1>Welcome! Please create your desired pizza</h1>
 
 <form action="${pageContext.request.contextPath}/pizza-order" method="post" id="pizza">
-    <label for="crust">Choose a crust</label>
+    <label for="crust">Choose A Crust</label>
     <select name="crust">
         <option value="thin">Thin</option>
         <option value="hand">Hand Tossed</option>
@@ -22,7 +22,7 @@
         <input type="submit" name="crust" id="crust">
     </select>
 
-    <label for="sauce">Choose a Sauce</label>
+    <label for="sauce">Choose A Sauce</label>
     <select name="sauce">
         <option value="tomato">Tomato Sauce</option>
         <option value="marinara">Marinara Sauce</option>
@@ -30,7 +30,7 @@
         <input type="submit" name="sauce" id="sauce">
     </select>
 
-    <label for="size">Choose a Size</label>
+    <label for="size">Choose A Size</label>
     <select name="size">
         <option value="small">Small</option>
         <option value="medium">Medium</option>
