@@ -40,13 +40,19 @@ public class MySQLAdsDao implements Ads {
 
     @Override
     public Long insert(Ad ad) {
+        String sql = "INSERT INTO ads(title, description, user_id) VALUES (?, ?, ?);";
         try {
-            Statement stmt = connection.createStatement();
-            stmt.executeUpdate(createInsertQuery(ad), Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+           stmt.setString(1, ad.getTitle());
+           stmt.setString(2, ad.getDescription());
+           stmt.setLong(3, ad.getUserId());
+            stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
             return rs.getLong(1);
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new RuntimeException("Error creating a new ad.", e);
         }
     }
@@ -73,5 +79,20 @@ public class MySQLAdsDao implements Ads {
             ads.add(extractAd(rs));
         }
         return ads;
+    }
+
+    @Override
+    public List<Ad> searchByTitle(String query) {
+        String sql = "SELECT * FROM ads WHERE title LIKE '%" + query + "%';";
+        PreparedStatement stmt = null;
+        String searchTermWithWildcards = "%" + query + "%";
+        try {
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, searchTermWithWildcards);
+            ResultSet rs = stmt.executeQuery(sql);
+            return createAdsFromResults(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving all ads.", e);
+        }
     }
 }
